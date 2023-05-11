@@ -17,13 +17,14 @@ require('dotenv').config();
 const salt = bcrypt.genSaltSync(10);
 const secret = 'kfenfhsfdf93efh479roubfslfjflbslfk'
 
-app.use(cors({credentials: true, origin: `https://blog-app-pranshu.netlify.app/`}));
+app.use(cors({credentials: true, origin: `http://localhost:3000/`}));
+
 app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'));
 
 
-mongoose.connect(process.env.DATABASE, {}).then(() => console.log("DB Connected!"))
+mongoose.connect('mongodb+srv://pranshu:pranshu@cluster0.py87lub.mongodb.net/?retryWrites=true&w=majority', {}).then(() => console.log("DB Connected!"))
 
 app.post('/register', async (req,res) => {
     const {username,password} = req.body;
@@ -147,3 +148,4 @@ app.listen(process.env.PORT || 4000, function(err){
 })
 
 // mongodb+srv://admin:admin@cluster0.py87lub.mongodb.net/?retryWrites=true&w=majority
+
